@@ -8,7 +8,12 @@ namespace DemoApi.PagedList
     {
         public PagedList(IQueryable<T> source, int pageNumber, int pageSize)
         {
-            this.TotalItems = source.Count();
+            if (pageNumber < 1)
+				throw new ArgumentOutOfRangeException("pageNumber", pageNumber, "PageNumber cannot be below 1.");
+			if (pageSize < 1)
+				throw new ArgumentOutOfRangeException("pageSize", pageSize, "PageSize cannot be less than 1.");
+
+            this.TotalItems = source != null ? source.Count() : 0;
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
             this.Items = source

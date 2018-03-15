@@ -37,10 +37,12 @@ namespace DemoApi
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IGenericRepository<Product>, GenericRepository<Product>>();
             services.AddTransient<IGenericRepository<Category>, GenericRepository<Category>>();
+            services.AddTransient<IGenericRepository<User>, GenericRepository<User>>();
 
             //config url helper
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

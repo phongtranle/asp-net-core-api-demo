@@ -45,7 +45,7 @@ namespace DemoApi.Services {
                 lst = lst.Where(m => m.Price == model.Price);
             }
 
-            return new PagedList.PagedList<ProductModel>(lst, model.PageNumber, model.PageSize);
+            return lst.ToPagedList(model.PageNumber, model.PageSize);
         }
     }
 }
