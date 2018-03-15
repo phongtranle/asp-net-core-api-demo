@@ -28,24 +28,6 @@ namespace DemoApi.Controllers
             categoryService = _categoryService;
         }
 
-        private List<LinkInfo> GetLinks(PagedList<ProductModel> list, string action, string method)
-        {
-            var links = new List<LinkInfo>();
-
-            if (list.HasPreviousPage)
-                links.Add(CreateLink(action, list.PreviousPageNumber, 
-                           list.PageSize, Rels.PREVIOUS_PAGE, method));
-
-            links.Add(CreateLink(action, list.PageNumber, 
-                           list.PageSize, Rels.SELF, method));
-
-            if (list.HasNextPage)
-                links.Add(CreateLink(action, list.NextPageNumber, 
-                           list.PageSize, Rels.NEXT_PAGE, method));
-
-            return links;
-        }
-
         [HttpGet(Name="GetProducts")]
         public IActionResult GetProducts(ProductFilterModel model)
         {
@@ -124,7 +106,7 @@ namespace DemoApi.Controllers
                     var prod = productService.GetById(id);
                     if (prod == null)
                     {
-                    return NotFound(); 
+                        return NotFound(); 
                     }
 
                     prod.Name = item.Name;

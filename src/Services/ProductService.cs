@@ -7,10 +7,10 @@ using System.Linq;
 namespace DemoApi.Services {
     public class ProductService : GenericService<Product>, IProductService
     {
-        private readonly ICategoryRepository categoryRepository;
+        private readonly IGenericRepository<Category> categoryRepository;
         public ProductService(
             IGenericRepository<Product> _baseRepository
-            , ICategoryRepository _categoryRepository) : base(_baseRepository)
+            , IGenericRepository<Category> _categoryRepository) : base(_baseRepository)
         {
             categoryRepository = _categoryRepository;
         }

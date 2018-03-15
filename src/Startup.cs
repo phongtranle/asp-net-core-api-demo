@@ -33,16 +33,13 @@ namespace DemoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<demoContext>();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<IGenericRepository<Product>, GenericRepository<Product>>();
-            services.AddTransient<IGenericRepository<Category>, GenericRepository<Category>>();
-            services.AddTransient<IGenericRepository<User>, GenericRepository<User>>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
             //config url helper
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
