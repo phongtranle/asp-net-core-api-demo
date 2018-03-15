@@ -12788,11 +12788,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\phong.tranle\\DemoApi\\DemoApi.csproj",
+      "projectUniqueName": "C:\\Users\\phong.tranle\\_GITHUB\\asp-net-core-api-demo\\src\\DemoApi.csproj",
       "projectName": "DemoApi",
-      "projectPath": "C:\\Users\\phong.tranle\\DemoApi\\DemoApi.csproj",
+      "projectPath": "C:\\Users\\phong.tranle\\_GITHUB\\asp-net-core-api-demo\\src\\DemoApi.csproj",
       "packagesPath": "C:\\Users\\phong.tranle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\phong.tranle\\DemoApi\\obj\\",
+      "outputPath": "C:\\Users\\phong.tranle\\_GITHUB\\asp-net-core-api-demo\\src\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -35,12 +35,15 @@ namespace DemoApi.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(45);
+                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("product");
+
+                entity.HasIndex(e => e.CateId)
+                    .HasName("PK_Product_category_idx");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
@@ -57,7 +60,7 @@ namespace DemoApi.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(45);
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.Price)
                     .HasColumnName("price")
