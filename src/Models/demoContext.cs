@@ -63,6 +63,7 @@ namespace DemoApi.Models
                     .HasMaxLength(200);
 
                 entity.Property(e => e.Price)
+                    .IsRequired()
                     .HasColumnName("price")
                     .HasColumnType("decimal(10,2)");
             });

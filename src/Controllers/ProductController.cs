@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using System.Net;
 
 namespace DemoApi.Controllers
 {
@@ -47,24 +49,38 @@ namespace DemoApi.Controllers
         [HttpGet(Name="GetProducts")]
         public IActionResult GetProducts(ProductFilterModel model)
         {
-            model.PageNumber = model.PageNumber > 0 ? model.PageNumber : _pageNumber;
-            model.PageSize = model.PageSize > 0 ? model.PageSize : _pageSize;
+            try
+            {
+                model.PageNumber = model.PageNumber > 0 ? model.PageNumber : _pageNumber;
+                model.PageSize = model.PageSize > 0 ? model.PageSize : _pageSize;
 
-            var lst = productService.GetProducts(model);
-            lst.Links = GetLinks(lst, "GetProducts", Methods.GET);
+                var lst = productService.GetProducts(model);
+                lst.Links = GetLinks(lst, "GetProducts", Methods.GET);
             
-            return Ok(lst);
+                return Ok(lst);
+            } 
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
         }
 
         [HttpGet("{id}", Name="GetProduct")]
         public IActionResult GetById(int id)
         {
-            var prod = productService.GetById(id);
-            if (prod == null)
+            try
             {
-                return NotFound();
+                var prod = productService.GetById(id);
+                if (prod == null)
+                {
+                    return NotFound();
+                }
+                return new ObjectResult(prod);
+            } 
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
-            return new ObjectResult(prod);
         }
 
         [HttpPost]
@@ -72,18 +88,24 @@ namespace DemoApi.Controllers
         {
             try 
             {
-                if (prod == null) 
+                if (ModelState.IsValid)
                 {
-                    return BadRequest();
+                    if (prod == null) 
+                    {
+                        return BadRequest();
+                    }
+                    productService.Add(prod);
+                    productService.Save();
+                    
+                    return CreatedAtRoute("GetProduct", new {id = prod.Id}, prod);
+                } else 
+                {
+                    return BadRequest(ModelState);
                 }
-                productService.Add(prod);
-                productService.Save();
-                
-                return CreatedAtRoute("GetProduct", new {id = prod.Id}, prod);
             } 
-            catch 
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
 
@@ -92,28 +114,35 @@ namespace DemoApi.Controllers
         {
             try
             {
-                if (item == null || item.Id != id)
+                if (ModelState.IsValid)
                 {
-                    return BadRequest();
-                }
-                
-                var prod = productService.GetById(id);
-                if (prod == null)
+                    if (item == null || item.Id != id)
+                    {
+                        return BadRequest();
+                    }
+                    
+                    var prod = productService.GetById(id);
+                    if (prod == null)
+                    {
+                    return NotFound(); 
+                    }
+
+                    prod.Name = item.Name;
+                    prod.Price = item.Price;
+
+                    productService.Update(prod);
+                    productService.Save();
+
+                    return new NoContentResult();
+                    }
+                else 
                 {
-                return NotFound(); 
+                    return BadRequest(ModelState);
                 }
-
-                prod.Name = item.Name;
-                prod.Price = item.Price;
-
-                productService.Update(prod);
-                productService.Save();
-
-                return new NoContentResult();
             }
-            catch
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
     }
