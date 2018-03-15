@@ -10,7 +10,14 @@ namespace DemoApi.Controllers
     public class BaseController : Controller
     {
         private readonly IUrlHelper urlHelper;
-        public BaseController(IUrlHelper _urlHelper) => urlHelper = _urlHelper;
+        protected int _pageSize;
+        protected int _pageNumber;
+        public BaseController(IUrlHelper _urlHelper) 
+        {
+            urlHelper = _urlHelper;
+            _pageSize = 10;
+            _pageNumber = 1;
+        }
         public LinkInfo CreateLink(
             string routeName, int pageNumber, int pageSize,
             string rel, string method)

@@ -47,8 +47,8 @@ namespace DemoApi.Controllers
         [HttpGet(Name="GetProducts")]
         public IActionResult GetProducts(ProductFilterModel model)
         {
-            model.PageNumber = model.PageNumber > 0 ? model.PageNumber : 1;
-            model.PageSize = model.PageSize > 0 ? model.PageSize : 10;
+            model.PageNumber = model.PageNumber > 0 ? model.PageNumber : _pageNumber;
+            model.PageSize = model.PageSize > 0 ? model.PageSize : _pageSize;
 
             var lst = productService.GetProducts(model);
             lst.Links = GetLinks(lst, "GetProducts", Methods.GET);
