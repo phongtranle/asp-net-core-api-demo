@@ -31,7 +31,7 @@ namespace DemoApi.Services {
                             Userid = user.Id,
                             Username = user.Username,
                             Loginname = user.Loginname,
-                            Mail = user.Email,
+                            Email = user.Email,
                             Storeid = store.Id,
                             Storename = store.Name,
                             Created = user.Created

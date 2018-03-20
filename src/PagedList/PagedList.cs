@@ -26,7 +26,6 @@ namespace DemoApi.PagedList
         public int PageNumber { get; }
         public int PageSize { get; }
         public IList<T> Items { get; }
-        public IList<LinkInfo> Links { get; set; }
         public int TotalPages =>
               (int)Math.Ceiling(this.TotalItems / (double)this.PageSize);
         public bool HasPreviousPage => this.PageNumber > 1;

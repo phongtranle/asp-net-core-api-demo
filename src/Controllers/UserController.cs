@@ -36,7 +36,6 @@ namespace DemoApi.Controllers
                 model.PageSize = model.PageSize > 0 ? model.PageSize : _pageSize;
 
                 var lst = _userService.GetUsers(model);
-                lst.Links = GetLinks(lst, "GetUsers", Methods.GET);
             
                 return Ok(lst);
             } 

@@ -37,7 +37,6 @@ namespace DemoApi.Controllers
                 model.PageSize = model.PageSize > 0 ? model.PageSize : _pageSize;
 
                 var lst = productService.GetProducts(model);
-                lst.Links = GetLinks(lst, "GetProducts", Methods.GET);
             
                 return Ok(lst);
             } 
