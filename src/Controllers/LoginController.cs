@@ -70,7 +70,7 @@ namespace DemoApi.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.Loginname),
                 new Claim(ClaimTypes.Role, Defines.RoleList[user.RoleId])
             };
 

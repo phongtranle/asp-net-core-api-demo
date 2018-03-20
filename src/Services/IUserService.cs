@@ -7,6 +7,7 @@ namespace DemoApi.Services
 {
     public interface IUserService : IGenericService<User>
     {
-        User GetLoginUser(string username, string password);
+        User GetLoginUser(string loginname, string password);
+        PagedList.PagedList<UserModel> GetUsers(UserFilterModel model);
     }
 }

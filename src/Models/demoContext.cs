@@ -8,6 +8,7 @@ namespace DemoApi.Models
     {
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Store> Store { get; set; }
         public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,9 +64,26 @@ namespace DemoApi.Models
                     .HasMaxLength(200);
 
                 entity.Property(e => e.Price)
-                    .IsRequired()
                     .HasColumnName("price")
                     .HasColumnType("decimal(10,2)");
+            });
+
+            modelBuilder.Entity<Store>(entity =>
+            {
+                entity.ToTable("store");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Created)
+                    .HasColumnName("created")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -76,8 +94,6 @@ namespace DemoApi.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Age).HasColumnType("int(11)");
-
                 entity.Property(e => e.Created).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
@@ -85,11 +101,9 @@ namespace DemoApi.Models
                     .HasColumnName("email")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Gender).HasColumnType("tinyint(4)");
-
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Loginname)
                     .IsRequired()
-                    .HasColumnName("name")
+                    .HasColumnName("loginname")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Password)
@@ -99,6 +113,10 @@ namespace DemoApi.Models
 
                 entity.Property(e => e.RoleId)
                     .HasColumnName("role_id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.StoreId)
+                    .HasColumnName("store_id")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Username)
