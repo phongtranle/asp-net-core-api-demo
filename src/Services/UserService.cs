@@ -34,7 +34,7 @@ namespace DemoApi.Services {
                             Email = user.Email,
                             Storeid = store.Id,
                             Storename = store.Name,
-                            Created = user.Created
+                            Created = store.Created.Value.ToString("yyyy年MM月dd HH:mm:ss")
                         };
             
 

@@ -10,6 +10,6 @@ namespace DemoApi.ViewModels
         public string Email { get; set; }
         public int Storeid { get; set; }
         public string Storename { get; set; }
-        public DateTime? Created { get; set; }
+        public string Created { get; set; }
     }
 }
