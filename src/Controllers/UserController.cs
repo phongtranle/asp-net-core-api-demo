@@ -21,8 +21,7 @@ namespace DemoApi.Controllers
     {
         private IUserService _userService;
 
-        public UserController(IUrlHelper urlHelper
-                            , IUserService userService) : base (urlHelper)
+        public UserController(IUserService userService) : base ()
         {
             _userService = userService;
         }

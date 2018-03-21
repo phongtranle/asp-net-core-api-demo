@@ -19,10 +19,8 @@ namespace DemoApi.Controllers
     {
         private IProductService productService;
         private ICategoryService categoryService;
-        public ProductController(
-            IUrlHelper _urlHelper 
-            , IProductService _productService
-            , ICategoryService _categoryService) : base (_urlHelper)
+        public ProductController( IProductService _productService
+            , ICategoryService _categoryService) : base ()
         {
             productService = _productService;
             categoryService = _categoryService;

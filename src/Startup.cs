@@ -41,15 +41,6 @@ namespace DemoApi
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
-            //config url helper
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IUrlHelper>(factory =>
-            {
-                var actionContext = factory.GetService<IActionContextAccessor>()
-                                           .ActionContext;
-                return new UrlHelper(actionContext);
-            });
-            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

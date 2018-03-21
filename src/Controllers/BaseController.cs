@@ -10,12 +10,10 @@ namespace DemoApi.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly IUrlHelper urlHelper;
         protected int _pageSize;
         protected int _pageNumber;
-        public BaseController(IUrlHelper _urlHelper) 
+        public BaseController() 
         {
-            urlHelper = _urlHelper;
             _pageSize = 10;
             _pageNumber = 1;
         }

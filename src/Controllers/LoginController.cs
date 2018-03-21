@@ -21,9 +21,8 @@ namespace DemoApi.Controllers
         private IConfiguration _config;
         private IUserService _userService;
 
-        public LoginController(IUrlHelper urlHelper
-                            ,IConfiguration config
-                            , IUserService userService) : base (urlHelper)
+        public LoginController(IConfiguration config
+                            , IUserService userService) : base ()
         {
             _config = config;
             _userService = userService;
