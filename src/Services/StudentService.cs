@@ -11,6 +11,11 @@ namespace DemoApi.Services {
         {
         }
 
+        public Student GetById(int id)
+        {
+            return FindById(m => m.Id == id);
+        }
+
         public PagedList<Student> GetStudents(StudentFilterModel model)
         {
             var lst = GetAll();
