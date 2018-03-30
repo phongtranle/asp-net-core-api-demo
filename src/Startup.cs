@@ -42,6 +42,8 @@ namespace DemoApi
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
+            services.AddCors();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -67,6 +69,11 @@ namespace DemoApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:5000")
+                    .AllowAnyHeader()
+                );
 
             app.UseAuthentication();
 

@@ -63,7 +63,7 @@ namespace DemoApi.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult Update(int id,[FromBody] Student model)
         {
             try 
@@ -86,6 +86,22 @@ namespace DemoApi.Controllers
                 return Ok("success");
             }
             catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id) 
+        {
+            try
+            {
+                var student = studentService.GetById(id);
+                studentService.Delete(student);
+                studentService.Save();
+                return Ok("success");
+            }
+            catch(Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
